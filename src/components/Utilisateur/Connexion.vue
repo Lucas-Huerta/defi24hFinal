@@ -214,8 +214,7 @@ form>div:last-child button{
   height: 5vh;
 }
 
-
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1300px) {
   form>div:first-child{
     width: 30vw;
   }

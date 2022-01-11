@@ -78,7 +78,7 @@
           conserve toujours l’idée que les projets réalisés représentent le savoir-faire du département.</p>
       </div>
 
-      <h2>et a propose de <span>nous</span></h2>
+      <h2>et à propos de <span>nous</span></h2>
 
       <p>
         Tout 3 étudiants en deuxième année de DUT Métiers du Multimédia et de l'Internet à l'IUT de Belfort-Montbéliard, nous avons eu l'opportunité de se charger de l'organisation et la mise en place de cet événement, dans la cadre de notre projet tuteuré de troisième semestre.
@@ -89,14 +89,14 @@
           <img src="../../assets/user.png" alt="user">
           <h3>Sebastian Chevallier</h3>
           <p>
-            Chef de projet et responsable du design du projet, c'est moi qui est chargé de réaliser les visuels aussi bien pour le print que pour le web (site Internet et réseaux sociaux)
+            Chef de projet et responsable du design du projet, c'est moi qui suis chargé de réaliser les visuels aussi bien pour le print que pour le web (site Internet et réseaux sociaux)
           </p>
         </div>
         <div class="etiquette">
           <img src="../../assets/user.png" alt="user">
           <h3>Lucas Huerta</h3>
           <p>
-            Je suis responsable du développement web dans ce projet. C'est-à-dire que c'est à moi d'intégrer le site web et les donnée les plus appropriées dans ce dernier
+            Je suis responsable du développement web dans ce projet. C'est-à-dire que c'est à moi d'intégrer le site web et les données les plus appropriées dans ce dernier
           </p>
 
         </div>
@@ -146,6 +146,9 @@
 </template>
 
 <script>
+import param from "../../param/param";
+import appService from "../../services/appService";
+
 export default {
   name: "QuiSommesNous",
 
@@ -194,7 +197,7 @@ export default {
       // Récupération des infos de l'utilisateur connecté
       axios({
         method: 'get',
-        url: param.hostUtilisateur + 'me',
+        url: param.hostUtilisateur + '/me',
         headers: headers
       }).then(function (response) {
         console.log("Données utilisateur", response.data);
@@ -399,6 +402,16 @@ footer p>span{
   display: flex;
   font-weight: bold;
   flex-direction: row;
+}
+
+/*RESPONSIVE*/
+
+@media screen and (min-width: 1300px) {
+
+  /*NAV*/
+  .buttons button {
+    margin: 2vh 0 0 0;
+  }
 }
 
 @media screen and (max-width: 1100px){

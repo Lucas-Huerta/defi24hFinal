@@ -29,6 +29,7 @@ export default {
       Timer: {
         deadline: "2022-01-21",
       },
+      titre: null,
 
       // Menu de l'utilisateur
       menu:['Accueil'],
@@ -112,6 +113,9 @@ a {
 /*CONNEXION UTILISATEUR*/
 
 .connectUtilisateur{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: #FFFFFF;
   background: linear-gradient(120deg, #8D668F, #A888AA);
   overflow-y: hidden;
@@ -140,11 +144,24 @@ a {
 
 /* --------------- MEDIA QUERIES ---------------*/
 
-@media screen and (min-width: 1400px) {
-  .connectUtilisateur{
-    max-height: 5vh;
-    margin: 2vh 0 0 0;
+/*GRAND ECRAN*/
+
+@media screen and (min-width: 1300px) {
+
+  body{
+    font-size: 20px;
   }
+
+  .connectUtilisateur{
+    max-height: 6vh;
+    margin: 2vh 4vw 0 0;
+  }
+
+  .connectUtilisateur button{
+    width: 8vw;
+    height: 4vh;
+  }
+
 }
 
 @media screen and (max-width: 500px) {

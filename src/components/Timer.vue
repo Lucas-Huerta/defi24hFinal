@@ -78,7 +78,7 @@ export default {
   methods: {
     countdown() {
       this.currentTime = Date.parse(this.deadline) - Date.parse(new Date());
-      console.log(this.currentTime);
+      // console.log(this.currentTime);
       if (this.currentTime > 0) {
         setTimeout(this.countdown, this.speed);
       } else {
@@ -105,6 +105,7 @@ export default {
   /*background-color: rgba(255,255,255,0.3);*/
   background-image: url(../assets/cercle.png);
   background-position: center;
+  justify-content: center;
   /*border-radius: 50px;*/
 }
 
@@ -116,12 +117,29 @@ export default {
   font-size: 2em;
 }
 
+@media screen and (min-width: 1300px) {
+
+  .colonneTimer{
+    margin: 0 2vw 0 2vw;
+    background-size: 30vh;
+  }
+
+  .nombre{
+    font-size: 4em;
+  }
+
+  .libelle{
+    font-size: 1.9em;
+  }
+}
+
 
 @media screen and (max-width: 1000px) {
 
   .colonneTimer{
     width: 15vw;
-    height: 15vh;
+    height: 20vh;
+    margin: 0 2vw 0 2vw;
   }
 
   .nombre{
@@ -136,11 +154,13 @@ export default {
   .colonneTimer{
     display: flex;
     flex-direction: column;
-    margin: 0 5vw 0 5vw;
+    width: 20vw;
+    padding-top: 2vh;
+    margin: 0 2vw 0 2vw;
     text-align: center;
     background-image: url(../assets/cercle.png);
     background-position: center;
-    background-size: auto;
+    background-size: 40vw;
     background-repeat: no-repeat;
   }
 

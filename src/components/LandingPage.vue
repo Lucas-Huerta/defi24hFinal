@@ -252,7 +252,7 @@ export default {
   name: "LandingPage",
   data () {
     return { }
-  }
+  },
 }
 </script>
 
@@ -481,14 +481,14 @@ header{
 
 .section-3>img{
   margin-left: 0;
-  width: 60vw;
-  height: 80vh;
+  width: 50vw;
+  height: auto;
   justify-content: left;
 }
 
 .section-3>div{
   width: auto;
-  margin: 10vh 10vw 0 10vw;
+  margin: 10vh 10vw 0 0;
 }
 
 .section-3>div>h3{
@@ -695,20 +695,46 @@ footer p>span{
 
 @media screen and (min-width: 1300px) {
 
+  .buttons button{
+    margin: 3vh 0 0 0;
+  }
+
   .section-1 div{
-    padding-top: 15vh;
+    padding-top: 10vh;
   }
 
   .section-1 img{
     height: 100vh;
   }
 
+  .section-1 p{
+    width: 30vw;
+  }
+
+  .section-3 img{
+    width: 50vw;
+  }
+
+  .section-3 div{
+    margin: 10vh 10vw 0 5vw ;
+  }
+
+  .section-3 p{
+    width: 30vw;
+  }
+}
+
+@media screen and (max-width: 1250px){
   .buttons button{
     margin: 2vh 0 0 0;
   }
 
-  .section-1 p{
-    width: 30vw;
+  .section-1 img{
+    width: auto;
+    height: 90vh;
+    position: sticky;
+    top: 30vh;
+    right: 1vw;
   }
 }
 

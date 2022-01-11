@@ -62,7 +62,6 @@
           Inscrivez-vous pour créer votre <span>équipe</span>
           ou la rejoindre !
         </h2>
-
         <div class="buttons">
           <!-- Liens internes à renseigner -->
           <router-link to="/Connexion">
@@ -77,7 +76,7 @@
       </div>
       <div class="infoEquipe" v-if="utilisateur.token != null">
           <div>
-            <img src="../../assets/romain-villar.png" alt="image équipe">
+            <img :src="getImageEquipe" alt="image équipe">
             <h3>{{ getNomEquipe }}</h3>
           </div>
           <div>
@@ -201,6 +200,12 @@ export default {
       var equipe = this.listeEquipe;
       for (let i = 0; i < equipe.length; i++) {
         return equipe[i].acf.description;
+      }
+    },
+    getImageEquipe(){
+      var equipe = this.listeEquipe;
+      for (let i = 0; i < equipe.length; i++) {
+        return equipe[i].acf.photo;
       }
     },
   },
@@ -380,7 +385,7 @@ header>a{
 }
 
 .buttons button{
-  margin: 4vh 0 0 0;
+  margin: 4vh 1vw 0 1vw;
   width: 12vw;
   height: 5vh;
 }
@@ -595,9 +600,17 @@ footer p>span{
   flex-direction: row;
 }
 
-@media screen and (max-width: 1100px) {
+/*RESPONSIVE*/
+
+@media screen and (min-width: 1300px) {
 
   /*NAV*/
+  .buttons button{
+    margin: 3vh 1vw 0 1vw;
+  }
+}
+
+@media screen and (max-width: 1100px) {
 
   /*NAV*/
 
@@ -859,7 +872,7 @@ footer p>span{
   }
 
   .membreEquipe img{
-    width: 20vw;
+    width: 15vw;
   }
 
   .autresInfos > div {

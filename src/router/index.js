@@ -4,6 +4,8 @@ import Router from 'vue-router'
 // ACCUEIL LANDING
 import LandingPage from "../components/LandingPage";
 import Accueil from "../components/Accueil";
+import Patience from "../components/Patience";
+import Rendu from "../components/Rendu";
 
 // PAGES
 import MiniJeux from "../components/MiniJeux";
@@ -61,6 +63,16 @@ export default new Router({
       path: "/Galerie",
       name: 'Galerie',
       component: Galerie
+    },
+    {
+      path: "/Patience",
+      name: "Patience",
+      component: Patience
+    },
+    {
+      path: "/Rendu",
+      name: "Rendu",
+      component: Rendu
     },
 
     // UTILISATEUR
@@ -130,7 +142,10 @@ export default new Router({
       path: '/MentionsLegales',
       name: MentionsLegales,
       component: MentionsLegales
-    }
+    },
+  ],
 
-  ]
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })

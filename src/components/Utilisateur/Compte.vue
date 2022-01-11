@@ -51,8 +51,9 @@
       </nav>
     </header>
 
-    <h1>Mon <span> profil</span> personnel</h1>
-
+    <h1>
+      Mon <span> profil</span> personnel
+    </h1>
     <section>
       <div v-if="utilisateur.token == null" class="errUtilisateur">
         <h2>
@@ -63,10 +64,10 @@
         <div class="buttons">
           <!-- Liens internes à renseigner -->
           <router-link to="/Connexion">
-            <button>Se connecter</button>
+            <button class="boutonViolet">Se connecter</button>
           </router-link>
           <router-link to="/Inscription">
-            <button>
+            <button class="boutonBlanc">
               S'inscrire
             </button>
           </router-link>
@@ -88,9 +89,11 @@
       <div class="equipe" v-if="utilisateur.token != null">
         <img src="../../assets/romain-villar.png" alt="traphouse">
         <div>
-          <h2>
-            <span>Traphouse</span> gang
-          </h2>
+          <router-link to="/Equipe">
+            <h2>
+              {{getUtilisateurs}}
+            </h2>
+          </router-link>
         </div>
       </div>
     </section>
@@ -131,9 +134,9 @@ import appService from "../../services/appService";
 
 export default {
   name: "Compte",
-  data () {
+  data() {
     return {
-      liste:[],
+      liste: [],
 
       utilisateur: { // Structure d'un utilisateur
         pseudo: null,
@@ -142,17 +145,83 @@ export default {
         role: null,
         imageUser: null
       },
+      Appartient: {
+        utilisateur: {
+          display_name: null,
+        },
+        equipe: {
+          post_name: null,
+        }
+      }
     }
   },
-  created() {
-    // Liste des vidéos
-    axios.get(param.host + "utilisateur")
+
+  computed: {
+    // Boucle qui parcours le tableau équipe.
+    // Dans le tableau équipe, il y a un autre tableau qui contient les utilisateurs qui
+    // composent l'équipe. La fonction GetUtilisateur
+    getUtilisateurs() {
+
+      let Appartenances = this.liste;
+      let nomUtilisateur = []; // Tableau de nom d'utilisateurs
+      let nomEquipe; // variable de nom d'equipes
+      let Equipe = []; // Tableau qui regroupe les equipes
+
+      // let tabForEach = this.liste;
+      //
+      // tabForEach.forEach(elements => console.log("Elements" + elements));
+      //
+      // for (let i = 0; i < tabForEach.length; i++) {
+      //   let utilisateur = tabForEach[i].acf.utilisateur; // Definition de l'utilisateur à la case i
+      //   Equipe = tabForEach[i].acf.equipe; // Definition de l'équipe à la case i
+      //
+      //   Equipe.forEach(elements => console.log("Equipe" + elements));
+      //
+      //   for (let j = 0; j < utilisateur.length; j++) {
+      //     nomUtilisateur[j] = utilisateur[j].display_name;
+      //     console.log("nomUser" + nomUtilisateur);
+      //
+      //     for (let k = 0; k < Equipe.length; k++){
+      //       nomEquipe = Equipe[j].post_name;
+      //     }
+      //     if (nomUtilisateur[j] === this.titre) { // Si le champ nom utilisateur à la case i est égal a nom de l'utilisateur actuellement connecté
+      //       return nomEquipe; // Alors on retourne son équipe
+      //       }else {
+      //       i++; // Sinon on parcours encore les utilisateurs dans l'équipe pour trouver celui présent
+      //     }
+      //   }
+      // }
+
+
+      for (let i = 0; i < Appartenances.length; i++) { // parcours des appartenances
+        let utilisateur = Appartenances[i].acf.utilisateur; // Definition de l'utilisateur à la case i
+        Equipe = Appartenances[i].acf.equipe; // Definition de l'équipe à la case i
+
+        for (let j = 0; j < utilisateur.length; j++) { // Parcours du tableau Utilisateur
+          nomUtilisateur[j] = utilisateur[j].display_name; // Récupération du champ display_name
+
+          for (let k = 0; k < Equipe.length; k++) { // Parcours du tableau d'équipe
+            nomEquipe = Equipe[j].post_name; // Récupération du champ post_name de l'équipe
+
+            if (nomUtilisateur[j] === this.titre) { // Si le champ nom utilisateur à la case i est égal a nom de l'utilisateur actuellement connecté
+              return nomEquipe; // Alors on retourne son équipe
+            } else {
+              j++; // Sinon on parcours encore les utilisateurs dans l'équipe pour trouver celui présent
+            }
+          }
+        }
+      }
+    }
+  },
+    created() {
+    // Liste des appartenances
+    axios.get(param.host + "appartient")
       .then(response => {
         // Récupération de la liste des Mini jeux
         this.liste = response.data;
-        console.log("Utilisateurs", this.liste);
+        console.log("Appartenances", this.liste);
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log("Erreur dans Appartenances"+ error))
 
     // Titre par défaut
     this.titre = param.titre;
@@ -282,7 +351,7 @@ header>a{
 }
 
 .buttons button{
-  margin: 4vh 0 0 0;
+  margin: 4vh 1vw 0 1vw;
   width: 12vw;
   height: 5vh;
 }
@@ -434,6 +503,29 @@ footer p>span{
   flex-direction: row;
 }
 
+@media screen and (min-width: 1300px){
+
+  .buttons button{
+    margin: 3vh 1vw 0 1vw;
+  }
+
+  .profil{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .equipe{
+    justify-content: center;
+    align-items: center;
+  }
+
+  .equipe img{
+    margin: auto 0 auto 0;
+  }
+}
+
+/*MEDIA QUERIES*/
+
 @media screen and (max-width: 1100px){
   /*NAV*/
 
@@ -543,7 +635,7 @@ footer p>span{
   .nav-principale div{
     display: flex;
     flex-direction: column;
-    margin: 5 auto 0 auto;
+    margin: 5vh auto 0 auto;
     max-height: 50vh;
     width: 50vw;
   }

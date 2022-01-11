@@ -164,7 +164,7 @@ export default {
       // Récupération des infos de l'utilisateur connecté
       axios({
         method: 'get',
-        url: param.hostUtilisateur + 'me',
+        url: param.hostUtilisateur + '/me',
         headers: headers
       }).then(function (response) {
         console.log("Données utilisateur", response.data);
@@ -288,7 +288,7 @@ header>a{
 }
 
 .buttons button{
-  margin: 4vh 0 0 0;
+  margin: 4vh 1vw 0 1vw;
   width: 12vw;
   height: 5vh;
 }
@@ -419,6 +419,17 @@ footer p>span{
   flex-direction: row;
 }
 
+
+/*RESPONSIVE*/
+
+@media screen and (min-width: 1300px) {
+
+  /*NAV*/
+  .buttons button{
+    margin: 3vh 1vw 0 1vw;
+  }
+}
+
 @media screen and (max-width: 1100px) {
 
   /*NAV*/
@@ -529,12 +540,13 @@ footer p>span{
   .nav-principale div{
     display: flex;
     flex-direction: column;
-    margin: 5 auto 0 auto;
+    margin: 0 auto 0 auto;
     max-height: 50vh;
     width: 50vw;
   }
 
   .buttons button{
+    margin: 2vh 0 0 0 ;
     width: 30vw;
     height: 5vh;
   }

@@ -162,7 +162,7 @@ export default {
       // Récupération des infos de l'utilisateur connecté
       axios({
         method: 'get',
-        url: param.hostUtilisateur + 'me',
+        url: param.hostUtilisateur + '/me',
         headers: headers
       }).then(function (response) {
         console.log("Données utilisateur", response.data);
@@ -284,7 +284,7 @@ header>a{
 }
 
 .buttons button{
-  margin: 4vh 0 0 0;
+  margin: 4vh 1vw 0 1vw;
   width: 12vw;
   height: 5vh;
 }
@@ -304,7 +304,7 @@ header>a{
   width: 80vw;
   height: auto;
   box-shadow: 5px 10px 10px #D9D3D9, -5px -5px 10px #D9D3D9;
-  padding: 0 2vw 2vh 2vw;
+  padding: 0 2vw 0 2vw;
   margin-bottom: 5vh;
   display: flex;
   flex-direction: row;
@@ -313,7 +313,9 @@ header>a{
 }
 
 .equipe img{
-  clip-path:ellipse(25% 25%);
+  margin: 2vh 0 2vh 0;
+  border-radius: 50%;
+  /*clip-path:ellipse(25% 25%);*/
   width: 10vw;
   height: 20vh;
 }
@@ -410,6 +412,16 @@ footer p>span{
   display: flex;
   font-weight: bold;
   flex-direction: row;
+}
+
+/*RESPONSIVE*/
+
+@media screen and (min-width: 1300px) {
+
+  /*NAV*/
+  .buttons button{
+    margin: 3vh 1vw 0 1vw;
+  }
 }
 
 @media screen and (max-width: 1100px){
@@ -522,12 +534,13 @@ footer p>span{
   .nav-principale div{
     display: flex;
     flex-direction: column;
-    margin: 5 auto 0 auto;
+    margin: 0 auto 0 auto;
     max-height: 50vh;
     width: 50vw;
   }
 
   .buttons button{
+    margin: 2vh 0 0 0 ;
     width: 30vw;
     height: 5vh;
   }

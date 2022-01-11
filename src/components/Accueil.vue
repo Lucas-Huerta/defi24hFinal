@@ -96,8 +96,10 @@
       <h2>Rendre mon <span>projet</span></h2>
       <p>Et voilà ! 24 heures se sont écoulées et tu n'as même pas l'air crevé, alors dépêche-toi de rendre ton
         projet pour que nous t'attribuons un maximum de points !</p>
-      <button onclick="window.location.href='https://drive.google.com/drive/folders/1je_FSL1BBb07i9ozDV8B4WKF_mXpLaIO?usp=sharing';" class="boutonViolet">
-        Accéder au rendu
+      <button class="boutonViolet">
+        <a href="https://drive.google.com/drive/folders/1je_FSL1BBb07i9ozDV8B4WKF_mXpLaIO?usp=sharing" target="_blank">
+          Accéder au rendu
+        </a>
       </button>
     </section>
 
@@ -334,7 +336,7 @@ header>a{
 }
 
 .buttons button{
-  margin: 4vh 0 0 0;
+  margin: 4vh 1vw 0 1vw;
   width: 12vw;
   height: 5vh;
 }
@@ -469,7 +471,11 @@ header>a{
 .rendu button{
   margin: 5vh auto 0 auto;
   width: 15vw;
-  height: 5vh;
+  height: auto;
+}
+
+.rendu button a{
+  color: white;
 }
 
 /*SECTION 4*/
@@ -597,29 +603,35 @@ footer p>span{
 
 /*RESPONSIVE*/
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1300px) {
 
   /*NAV*/
 
   .buttons button{
-    margin: 2vh 0 0 0;
+    margin: 3vh 1vw 0 1vw;
+  }
+
+  /*SECTION 1*/
+
+  .section-1 h1{
+    padding-top: 0;
   }
 
   /*SECTION GALERIE*/
 
   .galerie img:nth-child(2){
       width: 25vw;
-      height: 25vh;
+      height: 20vh;
   }
 
   .galerie img:nth-child(n){
-    height: 45vh;
+    height: auto;
   }
 
   /*RESEAU*/
 
   .colonnedroite p{
-    margin: 5vh 0 0 5vw;
+    margin: 10vh 0 0 5vw;
   }
 }
 
@@ -733,12 +745,13 @@ footer p>span{
   .nav-principale div{
     display: flex;
     flex-direction: column;
-    margin: 5 auto 0 auto;
+    margin: 0 auto 0 auto;
     max-height: 50vh;
     width: 50vw;
   }
 
   .buttons button{
+    margin: 2vh 0 0 0 ;
     width: 30vw;
     height: 5vh;
   }
@@ -849,6 +862,10 @@ footer p>span{
     width: 80vw;
     text-align: center;
     flex-direction: row;
+  }
+
+  .accueil h1 div{
+    margin-top: 2vh;
   }
 
   .accueil div{

@@ -275,7 +275,7 @@ export default {
       // Récupération des infos de l'utilisateur connecté
       axios({
         method: 'get',
-        url: param.hostUtilisateur + 'me',
+        url: param.hostUtilisateur + '/me',
         headers: headers
       }).then(function (response) {
         console.log("Données utilisateur", response.data);
@@ -458,6 +458,17 @@ footer p>span{
   font-weight: bold;
   flex-direction: row;
   color: #8d668f;
+}
+
+/*RESPONSIVE*/
+
+@media screen and (min-width: 1300px) {
+
+  /*NAV*/
+  .buttons button {
+    margin: 2vh 0 0 0;
+  }
+
 }
 
 @media screen and (max-width: 1100px){

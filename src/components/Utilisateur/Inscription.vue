@@ -10,10 +10,9 @@
 
     <div>
       <img src="../../assets/user.png" alt="image par défaut"/>
-<!--      <input type="file" accept="image/png, image/jpeg, image/jpg">-->
-      <label for="file"> Choisir une photo de profil</label>
+      <label for="file" @change="previewImage"> Choisir une <span> photo de profil</span></label>
       <input type="file" class="custom-file-input" ref="file" id="file"
-             @change="previewImage" name="imageProfil">
+              name="imageProfil" required>
       <div>
         <input type="text" placeholder="Prénom" name="Prénom"
                v-model="utilisateur.acf.prenom" required>
@@ -24,10 +23,9 @@
              v-model="utilisateur.acf.email" required>
       <input type="text" placeholder="Nom d'utilisateur" name="Pseudo"
              v-model="utilisateur.acf.pseudo" required>
-      <input type="password" placeholder="Mot de passe" name="Mdp"
+      <input type="text" placeholder="Mot de passe" name="Mdp"
              v-model="utilisateur.acf.mot_de_passe" required>
-
-      <button type="submit" name="submit" value="S'inscrire">
+      <button class="boutonViolet" type="submit" name="submit" value="S'inscrire">
         S'inscrire
       </button>
     </div>
@@ -80,7 +78,7 @@ export default {
         // Header pour authorisation
         headers: headers
       }).then(response=>{
-        // Récupération de la liste des vidéos
+        // Récupération de la liste des utilisateurs
         this.liste = response.data;
         console.log("Liste", this.liste);
       })
@@ -122,9 +120,9 @@ export default {
           'password': param.psw
         }
       }).then(function (response) {
-        console.log("Reponse token", response);
+        // console.log("Reponse token", response);
         let token = response.data.token;
-        console.log("Token", token);
+        // console.log("Token", token);
 
         // Création de l'image
         const formData = new FormData();
@@ -149,9 +147,9 @@ export default {
           console.log("Retour upload image", response);
           // Récupération id de l'image
           let idImage = response.data.id;
-          console.log("idImage", idImage);
-          let UrlImage = response.data.source_url;
-          console.log("Url Image", UrlImage);
+          // console.log("idImage", idImage);
+          // let UrlImage = response.data.source_url;
+          // console.log("Url Image", UrlImage);
 
           // Création de l'utilisateur
           axios({
@@ -224,7 +222,6 @@ form{
   overflow-x: hidden;
 }
 
-
 form>div:first-child{
   margin: auto;
   width: 40vw;
@@ -255,9 +252,14 @@ form input{
   border-bottom-style: groove;
 }
 
+form div label span{
+  font-weight: bold;
+}
+
 form>div:last-child>div{
   display: flex;
   flex-direction: row;
+  margin-top: 2vh;
 }
 
 form>div:last-child>div>input{
@@ -265,17 +267,11 @@ form>div:last-child>div>input{
 }
 
 form button{
-  border: #FDFDFD solid 1px;
-  border-radius: 50px;
-  background-color: #8D668F;
-  color: #FFFFFF ;
   width: 15vw;
   height: 5vh;
-  box-shadow: 5px 10px 10px #D9D3D9, -5px -5px 10px #D9D3D9;
-  text-transform: uppercase;
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1300px) {
   form>div:first-child{
     width: 30vw;
   }
@@ -336,7 +332,7 @@ form button{
   form>div>img{
     width: 20vw;
     height: 20vw;
-    margin: 0 auto 4vh auto;
+    margin: 0 auto 0 auto;
   }
 
   form input{
