@@ -1093,13 +1093,21 @@ footer p>span{
 
   .section-3{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     width: 100vw;
   }
 
   .section-3 h2{
     text-align: center;
     width: 80vw;
+  }
+
+  .section-3>div{
+    margin: auto;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .section-3>div>h3{
@@ -1113,7 +1121,7 @@ footer p>span{
 
   .section-3 img{
     width: 100vw;
-    height: 50vh;
+    height: auto;
   }
 
   /*SECTION 4 */

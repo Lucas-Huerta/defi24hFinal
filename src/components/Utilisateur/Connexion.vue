@@ -115,7 +115,7 @@ export default {
         // Token , nom prénom
         let localValues = {
           nom: this.utilisateur.user_display_name,
-          role: this.utilisateur.user_role[0],
+          role: this.utilisateur.user_role,
           token: this.utilisateur.token,
           imageUser: this.utilisateur.user_avatar
         }

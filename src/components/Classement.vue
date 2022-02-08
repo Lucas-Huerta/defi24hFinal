@@ -90,8 +90,12 @@
       </ul>
 
       <div class="reseaux-sociaux-footer">
-        <img src="../assets/footer/instagram.png" alt="" class="logo-instagram">
-        <img src="../assets/footer/facebook.png" alt="" class="logo-facebook">
+        <a href="https://www.instagram.com/ledefi24heures/">
+          <img src="../assets/footer/instagram.png" alt="" class="logo-instagram">
+        </a>
+        <a href="https://www.facebook.com/ledefi24heures">
+          <img src="../assets/footer/facebook.png" alt="" class="logo-facebook">
+        </a>
       </div>
 
       <p class="mentions-légales">Exercice réalisé dans le cadre d'un exercice pédagogique au <span> département MMI de Montbéliard</span>
@@ -394,8 +398,8 @@ footer li{
 }
 
 .reseaux-sociaux-footer img{
-  width: 5vw;
-  height: 10vh;
+  width: 4vw;
+  height: auto;
   margin: 5vh 2vw 5vh 2vw;
 }
 

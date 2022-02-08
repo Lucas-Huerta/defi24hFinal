@@ -80,8 +80,8 @@
             <h3>{{ getNomEquipe }}</h3>
           </div>
           <div>
-            <p><span>1569</span> points</p>
-            <p><span>5</span> pénalités</p>
+            <p><span>{{ getPointEquipe }}</span> points</p>
+            <p><span>{{ getPenalitee }}</span> pénalités</p>
           </div>
         </div>
         <div class="autresInfos" v-if="utilisateur.token != null">
@@ -91,7 +91,7 @@
               <li v-for="nomUser in getUtilisateurs" :key="nomUser.id">
                 <img src="../../assets/user.png" alt="photo participant 1">
                 <p>
-                  {{ nomUser }}
+                  {{ nomUser.display_name }}
                 </p>
               </li>
             </ul>
@@ -129,8 +129,12 @@
       </ul>
 
       <div class="reseaux-sociaux-footer">
-        <img src="../../assets/footer/instagram.png" alt="" class="logo-instagram">
-        <img src="../../assets/footer/facebook.png" alt="" class="logo-facebook">
+        <a href="https://www.instagram.com/ledefi24heures/">
+          <img src="../../assets/footer/instagram.png" alt="" class="logo-instagram">
+        </a>
+        <a href="https://www.facebook.com/ledefi24heures">
+          <img src="../../assets/footer/facebook.png" alt="" class="logo-facebook">
+        </a>
       </div>
 
       <p class="mentions-légales">Exercice réalisé dans le cadre d'un exercice pédagogique au <span> département MMI de Montbéliard</span>
@@ -173,41 +177,179 @@ export default {
       menu: ['Accueil']
     }
   },
-
   computed: {
     // Boucle qui parcours le tableau équipe.
     // Dans le tableau équipe, il y a un autre tableau qui contient les utilisateurs qui
     // composent l'équipe. La fonction GetUtilisateur
     getUtilisateurs() {
-      let equipe = this.listeEquipe;
-      let nom = [];
-      for (let i = 0; i < equipe.length; i++) {
-        let utilisateur = equipe[i].acf.utilisateur;
-        for (let j = 0; j < utilisateur.length; j++) {
-          nom[j] = utilisateur[j].display_name;
+      let tabEquipe = this.listeEquipe;
+      let tabUtilisateur ;
+      let nomEquipe; // variable de nom d'equipes
+      let Equipe = [] ; // Tableau qui regroupe les equipes
+
+      for (let i = 0; i < tabEquipe.length; i++) { // parcours des equipes
+        Equipe = tabEquipe;
+        for (let j = 0; j < Equipe.length; j++) {
+          nomEquipe = Equipe[j].acf.nom;
+          tabUtilisateur = Equipe[j].acf.utilisateur;
+
+          for (let k = 0; k < tabUtilisateur.length; k++) {
+            let nomUtilisateur = tabUtilisateur[k].display_name;
+            console.log("Utilisateurs boucle k", nomUtilisateur);
+
+            if (nomUtilisateur === this.titre) {
+              return tabUtilisateur;
+            }
+          }
         }
       }
-      return nom;
+
+
+      // let equipe = this.listeEquipe;
+      // let nom = [];
+      // for (let i = 0; i < equipe.length; i++) {
+      //   let utilisateur = equipe[i].acf.utilisateur;
+      //   for (let j = 0; j < utilisateur.length; j++) {
+      //     nom[j] = utilisateur[j].display_name;
+      //     // if (nom[j] === this.titre) {
+      //     //   return nom;
+      //     // } else {
+      //     //   i++;
+      //     // }
+      //
+      //     // if (nom[j] === this.titre) { // Si le champ nom utilisateur à la case i est égal a nom de l'utilisateur actuellement connecté
+      //     //   return nom[j]; // on retourne l'utilisateur
+      //     // } else {
+      //     //   j++; // Sinon on parcours encore les utilisateurs dans l'équipe pour trouver celui présent
+      //     // }
+      //   }
+      // }
+      // console.log(nom);
+      // return nom;
     },
 
     getNomEquipe() {
-      var equipe = this.listeEquipe;
-      for (let i = 0; i < equipe.length; i++) {
-        return equipe[i].acf.nom;
+      let tabEquipe = this.listeEquipe;
+      let tabUtilisateur ;
+      let nomEquipe; // variable de nom d'equipes
+      let Equipe = [] ; // Tableau qui regroupe les equipes
+
+      for (let i = 0; i < tabEquipe.length; i++) { // parcours des equipes
+        Equipe = tabEquipe;
+        for (let j = 0; j < Equipe.length; j++) {
+          nomEquipe = Equipe[j].acf.nom;
+          tabUtilisateur = Equipe[j].acf.utilisateur;
+
+          for (let k = 0; k < tabUtilisateur.length; k++) {
+            let nomUtilisateur = tabUtilisateur[k].display_name;
+            console.log("Utilisateurs boucle k", nomUtilisateur);
+
+            if (nomUtilisateur === this.titre) {
+              return nomEquipe;
+            }
+          }
+        }
       }
     },
     getDescriptionEquipe(){
-      var equipe = this.listeEquipe;
-      for (let i = 0; i < equipe.length; i++) {
-        return equipe[i].acf.description;
+      let tabEquipe = this.listeEquipe;
+      let tabUtilisateur ;
+      let nomEquipe; // variable de nom d'equipes
+      let Equipe = [] ; // Tableau qui regroupe les equipes
+
+      for (let i = 0; i < tabEquipe.length; i++) { // parcours des equipes
+        Equipe = tabEquipe;
+        for (let j = 0; j < Equipe.length; j++) {
+          nomEquipe = Equipe[j].acf.nom;
+          tabUtilisateur = Equipe[j].acf.utilisateur;
+          let descriptionEquipe = Equipe[j].acf.description;
+
+          for (let k = 0; k < tabUtilisateur.length; k++) {
+            let nomUtilisateur = tabUtilisateur[k].display_name;
+            console.log("Utilisateurs boucle k", nomUtilisateur);
+
+            if (nomUtilisateur === this.titre) {
+              return descriptionEquipe;
+            }
+          }
+        }
       }
     },
     getImageEquipe(){
-      var equipe = this.listeEquipe;
-      for (let i = 0; i < equipe.length; i++) {
-        return equipe[i].acf.photo;
+      let tabEquipe = this.listeEquipe;
+      let tabUtilisateur ;
+      let nomEquipe; // variable de nom d'equipes
+      let Equipe = [] ; // Tableau qui regroupe les equipes
+      let photoEquipe; // Variable qui prend les photos
+
+      for (let i = 0; i < tabEquipe.length; i++) { // parcours des equipes
+        Equipe = tabEquipe;
+        for (let j = 0; j < Equipe.length; j++) {
+          nomEquipe = Equipe[j].acf.nom;
+          tabUtilisateur = Equipe[j].acf.utilisateur;
+          photoEquipe = Equipe[j].acf.photo;
+
+          for (let k = 0; k < tabUtilisateur.length; k++) {
+            let nomUtilisateur = tabUtilisateur[k].display_name;
+            console.log("Utilisateurs boucle k", nomUtilisateur);
+
+            if (nomUtilisateur === this.titre) {
+              return photoEquipe;
+            }
+          }
+        }
       }
     },
+
+    getPointEquipe(){
+      let tabEquipe = this.listeEquipe;
+      let tabUtilisateur ;
+      let nomEquipe; // variable de nom d'equipes
+      let Equipe = [] ; // Tableau qui regroupe les equipes
+
+      for (let i = 0; i < tabEquipe.length; i++) { // parcours des equipes
+        Equipe = tabEquipe;
+        for (let j = 0; j < Equipe.length; j++) {
+          nomEquipe = Equipe[j].acf.nom;
+          tabUtilisateur = Equipe[j].acf.utilisateur;
+          let pointEquipe = Equipe[j].acf.points_totaux;
+
+          for (let k = 0; k < tabUtilisateur.length; k++) {
+            let nomUtilisateur = tabUtilisateur[k].display_name;
+            console.log("Utilisateurs boucle k", nomUtilisateur);
+
+            if (nomUtilisateur === this.titre) {
+              return pointEquipe;
+            }
+          }
+        }
+      }
+    },
+
+    getPenalitee(){
+      let tabEquipe = this.listeEquipe;
+      let tabUtilisateur ;
+      let nomEquipe; // variable de nom d'equipes
+      let Equipe = [] ; // Tableau qui regroupe les equipes
+
+      for (let i = 0; i < tabEquipe.length; i++) { // parcours des equipes
+        Equipe = tabEquipe;
+        for (let j = 0; j < Equipe.length; j++) {
+          nomEquipe = Equipe[j].acf.nom;
+          tabUtilisateur = Equipe[j].acf.utilisateur;
+          let penalitee = Equipe[j].acf.total_penalitee;
+
+          for (let k = 0; k < tabUtilisateur.length; k++) {
+            let nomUtilisateur = tabUtilisateur[k].display_name;
+            console.log("Utilisateurs boucle k", nomUtilisateur);
+
+            if (nomUtilisateur === this.titre) {
+              return penalitee;
+            }
+          }
+        }
+      }
+    }
   },
 
   created() {
@@ -580,8 +722,8 @@ footer li{
 }
 
 .reseaux-sociaux-footer img{
-  width: 5vw;
-  height: 10vh;
+  width: 4vw;
+  height: auto;
   margin: 5vh 2vw 5vh 2vw;
 }
 

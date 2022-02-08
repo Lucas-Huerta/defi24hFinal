@@ -87,11 +87,11 @@
       </div>
 
       <div class="equipe" v-if="utilisateur.token != null">
-        <img src="../../assets/romain-villar.png" alt="traphouse">
+        <img :src="getPhotoEquipe" alt="photo de l'équipe">
         <div>
-          <router-link to="/Equipe">
+          <router-link to="/Equipe" :params="getUtilisateurs">
             <h2>
-              {{getUtilisateurs}}
+              {{ getUtilisateurs }}
             </h2>
           </router-link>
         </div>
@@ -117,8 +117,12 @@
       </ul>
 
       <div class="reseaux-sociaux-footer">
-        <img src="../../assets/footer/instagram.png" alt="" class="logo-instagram">
-        <img src="../../assets/footer/facebook.png" alt="" class="logo-facebook">
+        <a href="https://www.instagram.com/ledefi24heures/">
+          <img src="../../assets/footer/instagram.png" alt="" class="logo-instagram">
+        </a>
+        <a href="https://www.facebook.com/ledefi24heures">
+          <img src="../../assets/footer/facebook.png" alt="" class="logo-facebook">
+        </a>
       </div>
 
       <p class="mentions-légales">Exercice réalisé dans le cadre d'un exercice pédagogique au <span> département MMI de Montbéliard</span>
@@ -137,7 +141,7 @@ export default {
   data() {
     return {
       liste: [],
-
+      tabListeEquipe: [],
       utilisateur: { // Structure d'un utilisateur
         pseudo: null,
         mot_de_passe: null,
@@ -145,12 +149,12 @@ export default {
         role: null,
         imageUser: null
       },
-      Appartient: {
+      Equipe: {
+        nom: null,
+        description: null,
+        photo: null,
         utilisateur: {
           display_name: null,
-        },
-        equipe: {
-          post_name: null,
         }
       }
     }
@@ -161,52 +165,49 @@ export default {
     // Dans le tableau équipe, il y a un autre tableau qui contient les utilisateurs qui
     // composent l'équipe. La fonction GetUtilisateur
     getUtilisateurs() {
-
-      let Appartenances = this.liste;
-      let nomUtilisateur = []; // Tableau de nom d'utilisateurs
+      let tabEquipe = this.tabListeEquipe;
+      let tabUtilisateur ;
       let nomEquipe; // variable de nom d'equipes
-      let Equipe = []; // Tableau qui regroupe les equipes
+      let Equipe = [] ; // Tableau qui regroupe les equipes
 
-      // let tabForEach = this.liste;
-      //
-      // tabForEach.forEach(elements => console.log("Elements" + elements));
-      //
-      // for (let i = 0; i < tabForEach.length; i++) {
-      //   let utilisateur = tabForEach[i].acf.utilisateur; // Definition de l'utilisateur à la case i
-      //   Equipe = tabForEach[i].acf.equipe; // Definition de l'équipe à la case i
-      //
-      //   Equipe.forEach(elements => console.log("Equipe" + elements));
-      //
-      //   for (let j = 0; j < utilisateur.length; j++) {
-      //     nomUtilisateur[j] = utilisateur[j].display_name;
-      //     console.log("nomUser" + nomUtilisateur);
-      //
-      //     for (let k = 0; k < Equipe.length; k++){
-      //       nomEquipe = Equipe[j].post_name;
-      //     }
-      //     if (nomUtilisateur[j] === this.titre) { // Si le champ nom utilisateur à la case i est égal a nom de l'utilisateur actuellement connecté
-      //       return nomEquipe; // Alors on retourne son équipe
-      //       }else {
-      //       i++; // Sinon on parcours encore les utilisateurs dans l'équipe pour trouver celui présent
-      //     }
-      //   }
-      // }
+      for (let i = 0; i < tabEquipe.length; i++) { // parcours des equipes
+        Equipe = tabEquipe;
+        for (let j = 0; j < Equipe.length; j++) {
+          nomEquipe = Equipe[j].acf.nom;
+          tabUtilisateur = Equipe[j].acf.utilisateur;
 
+          for (let k = 0; k < tabUtilisateur.length; k++) {
+            let nomUtilisateur = tabUtilisateur[k].display_name;
+            console.log("Utilisateurs boucle k", nomUtilisateur);
 
-      for (let i = 0; i < Appartenances.length; i++) { // parcours des appartenances
-        let utilisateur = Appartenances[i].acf.utilisateur; // Definition de l'utilisateur à la case i
-        Equipe = Appartenances[i].acf.equipe; // Definition de l'équipe à la case i
+            if (nomUtilisateur === this.titre) {
+              return nomEquipe;
+            }
+          }
+        }
+      }
+    },
 
-        for (let j = 0; j < utilisateur.length; j++) { // Parcours du tableau Utilisateur
-          nomUtilisateur[j] = utilisateur[j].display_name; // Récupération du champ display_name
+    getPhotoEquipe() {
+      let tabEquipe = this.tabListeEquipe;
+      let tabUtilisateur ;
+      let nomEquipe; // variable de nom d'equipes
+      let Equipe = [] ; // Tableau qui regroupe les equipes
+      let photoEquipe; // Variable qui prend les photos
 
-          for (let k = 0; k < Equipe.length; k++) { // Parcours du tableau d'équipe
-            nomEquipe = Equipe[j].post_name; // Récupération du champ post_name de l'équipe
+      for (let i = 0; i < tabEquipe.length; i++) { // parcours des equipes
+        Equipe = tabEquipe;
+        for (let j = 0; j < Equipe.length; j++) {
+          nomEquipe = Equipe[j].acf.nom;
+          tabUtilisateur = Equipe[j].acf.utilisateur;
+          photoEquipe = Equipe[j].acf.photo;
 
-            if (nomUtilisateur[j] === this.titre) { // Si le champ nom utilisateur à la case i est égal a nom de l'utilisateur actuellement connecté
-              return nomEquipe; // Alors on retourne son équipe
-            } else {
-              j++; // Sinon on parcours encore les utilisateurs dans l'équipe pour trouver celui présent
+          for (let k = 0; k < tabUtilisateur.length; k++) {
+            let nomUtilisateur = tabUtilisateur[k].display_name;
+            console.log("Utilisateurs boucle k", nomUtilisateur);
+
+            if (nomUtilisateur === this.titre) {
+              return photoEquipe;
             }
           }
         }
@@ -214,16 +215,17 @@ export default {
     }
   },
     created() {
-    // Liste des appartenances
-    axios.get(param.host + "appartient")
-      .then(response => {
-        // Récupération de la liste des Mini jeux
-        this.liste = response.data;
-        console.log("Appartenances", this.liste);
-      })
-      .catch(error => console.log("Erreur dans Appartenances"+ error))
 
-    // Titre par défaut
+      // Liste des equipes
+      axios.get(param.host + "equipe")
+        .then(response => {
+          // Récupération de la liste des Mini jeux
+          this.tabListeEquipe = response.data;
+          console.log("Equipes: ", this.tabListeEquipe);
+        })
+        .catch(error => console.log("Erreur dans equipe"+ error))
+
+      // Titre par défaut
     this.titre = param.titre;
 
     // Recherche si utilisateur localStorage
@@ -391,7 +393,7 @@ section{
 
 .profil img{
   width: 5vw;
-  height: 10vh;
+  height: auto;
   margin: auto 5vw auto 5vw;
 }
 
@@ -425,7 +427,7 @@ section{
 .equipe img{
   clip-path:ellipse(22% 50%);
   width: 20vw;
-  height: 20vh;
+  height: auto;
   margin: auto;
 }
 
@@ -483,8 +485,8 @@ footer li{
 }
 
 .reseaux-sociaux-footer img{
-  width: 5vw;
-  height: 10vh;
+  width: 4vw;
+  height: auto;
   margin: 5vh 2vw 5vh 2vw;
 }
 
@@ -510,6 +512,12 @@ footer p>span{
   }
 
   .profil{
+    display: flex;
+    width: 40vw;
+  }
+
+  .profil>div{
+    width: 30vw;
     display: flex;
     flex-direction: column;
   }

@@ -9,10 +9,10 @@
     </div>
 
     <div>
-      <img src="../../assets/user.png" alt="image par défaut"/>
-      <label for="file" @change="previewImage"> Choisir une <span> photo de profil</span></label>
-      <input type="file" class="custom-file-input" ref="file" id="file"
-              name="imageProfil" required>
+      <img class="preview" @change="previewImage" src="../../assets/user.png" alt="image par défaut"/>
+<!--      <label for="file"> Choisir une <span> photo de profil</span></label>-->
+<!--      <input type="file" class="custom-file-input" ref="file" id="file"-->
+<!--              name="file" >-->
       <div>
         <input type="text" placeholder="Prénom" name="Prénom"
                v-model="utilisateur.acf.prenom" required>
@@ -59,7 +59,7 @@ export default {
     // Initialisation du token
     // Se signer par JWT API
     axios({
-      method: 'get',
+      method: 'post',
       url: param.auth,
       data: {
         'username': param.user,
@@ -92,12 +92,12 @@ export default {
       this.file = this.$refs.file.files[0];
       // Reference to the DOM input element
       // Reference du fichier à prévisualiser
-      var input = event.target;
+      let input = event.target;
       // On s'assure que l'on a au moins un fichier à lire
       if (input.files && input.files[0]) {
         // Creation d'un filereader
         // Pour lire l'image et la convertir en base 64
-        var reader = new FileReader();
+        let reader = new FileReader();
         // fonction callback appellée lors que le fichier a été chargé
         reader.onload = (e) => {
           // Read image as base64 and set to imageData
@@ -121,8 +121,9 @@ export default {
         }
       }).then(function (response) {
         // console.log("Reponse token", response);
+
         let token = response.data.token;
-        // console.log("Token", token);
+        console.log("Token", token);
 
         // Création de l'image
         const formData = new FormData();
@@ -137,19 +138,21 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
 
+        console.log("head", headers);
+
         // Requête Ajax pour Upload image
         axios({
-          method: 'post',
-          url: param.host + 'media',
+          method: 'POST',
+          url: "https://wdpdefi24h.lucashuerta.fr/wp-json/wp/v2/media",
           data: formData,
           headers: headers
         }).then(function (response) {
           console.log("Retour upload image", response);
           // Récupération id de l'image
           let idImage = response.data.id;
-          // console.log("idImage", idImage);
-          // let UrlImage = response.data.source_url;
-          // console.log("Url Image", UrlImage);
+          console.log("idImage", idImage);
+          let UrlImage = response.data.source_url;
+          console.log("Url Image", UrlImage);
 
           // Création de l'utilisateur
           axios({
@@ -230,7 +233,7 @@ form>div:first-child{
 form>div:last-child{
   justify-content: flex-end;
   text-align: center;
-  margin-top: 10vh;
+  margin-top: 15vh;
   width: 30vw;
 }
 
@@ -240,7 +243,7 @@ form>div>img{
   justify-content: center;
   margin: auto auto 2vh auto;
   width: 10vw;
-  height: 20vh;
+  height: auto;
 }
 
 form input{

@@ -110,6 +110,15 @@ a {
   text-transform: uppercase;
 }
 
+body::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #8d668f; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+}
+
 /*CONNEXION UTILISATEUR*/
 
 .connectUtilisateur{

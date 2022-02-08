@@ -37,7 +37,7 @@ export default {
     deadline: {
       type: String,
       required: true,
-      default:"2022-01-21"
+      default:"2022-03-11"
     },
     speed: {
       type: Number,

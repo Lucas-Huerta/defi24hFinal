@@ -384,8 +384,8 @@ footer li{
 }
 
 .reseaux-sociaux-footer img{
-  width: 5vw;
-  height: 10vh;
+  width: 4vw;
+  height: auto;
   margin: 5vh 2vw 5vh 2vw;
 }
 

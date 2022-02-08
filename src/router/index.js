@@ -123,7 +123,10 @@ export default new Router({
     {
       path: '/Equipe',
       name: Equipe,
-      component: Equipe
+      component: Equipe,
+      props: (route) => ({
+        getUtilisateurs: route.query.getUtilisateurs
+      })
     },
     {
       path: '/ErreurEquipe',
